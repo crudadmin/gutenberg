@@ -9,6 +9,10 @@
 @import "~gutenberg/packages/edit-post/build-style/style.css";
 @import "~gutenberg/packages/format-library/build-style/style.css";
 @import "~gutenberg/packages/list-reusable-blocks/build-style/style.css";
+/*
+Gutemberg from v9 does not imports icons. We need import them manually
+@import "~@icon/dashicons/dashicons.css";
+*/
 
 @import "./wordpress-overrides.scss";
 

@@ -41,8 +41,8 @@ export const editorSettings = {
   disableCustomColors: false,
   disablePostFormats: false,
   mediaLibrary: false,
-  titlePlaceholder: 'Add title',
-  bodyPlaceholder: 'Write your story',
+  titlePlaceholder: false,
+  bodyPlaceholder: false,
   isRTL: false,
   hasPermissionsToManageWidgets: true,
   postLock: {

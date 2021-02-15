@@ -14,12 +14,14 @@ export default function init (target, options = {}) {
   configureAPI(options)
 
   // Toggle features
-  const { toggleFeature } = data.dispatch('core/edit-post')
-  toggleFeature('welcomeGuide')
-  toggleFeature('fullscreenMode')
+  const { toggleFeature } = data.dispatch('core/edit-post');
+  const { isFeatureActive } = data.select('core/edit-post');
+
+  isFeatureActive('welcomeGuide') && toggleFeature('welcomeGuide');
+  isFeatureActive('fullscreenMode') && toggleFeature('fullscreenMode');
 
   // Disable block patterns
-  plugins.unregisterPlugin('edit-post')
+  plugins.getPlugin('edit-post') && plugins.unregisterPlugin('edit-post')
 
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(async () => {

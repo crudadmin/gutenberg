@@ -126,3 +126,7 @@ export const user = {
     collection: []
   }
 }
+
+export const edits = {
+
+}

@@ -117,6 +117,11 @@ const requests = {
     method: 'GET',
     regex: /\/wp\/v2\/users\/\?(.*)/g,
     run: getUsers
+  },
+  getEdits: {
+    method: 'GET',
+    regex: /\/\?context=edit&_locale=user/g,
+    run: getEdits
   }
 }
 
@@ -345,6 +350,13 @@ async function getTypes () {
  */
 async function getUser () {
   return MockData.user
+}
+
+/**
+ * Mock user request
+ */
+async function getEdits () {
+  return MockData.edits
 }
 
 /**

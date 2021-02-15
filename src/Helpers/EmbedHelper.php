@@ -12,7 +12,7 @@ class EmbedHelper
      * @param String $html
      * @return String - The HTML containing all embed code
      */
-    public static function renderEmbeds($html)
+    public static function render($html)
     {
         // Match URL from raw Gutenberg embed content
         $regex = '/<!-- wp:core-embed\/.*?-->\s*?<figure class="wp-block-embed.*?".*?<div class="wp-block-embed__wrapper">\s*?(.*?)\s*?<\/div>.*?<\/figure>/';

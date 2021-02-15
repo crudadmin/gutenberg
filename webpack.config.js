@@ -1,10 +1,31 @@
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+const config = require('./config.js');
 
 const externals = {
   react: 'React',
   'react-dom': 'ReactDOM'
+}
+
+const copyFiles = () => {
+  var copy = [];
+
+  config.paths.forEach(path => {
+    copy = copy.concat([
+      {
+          from: './public/js',
+          to: path+'/js',
+      },
+      {
+          from: './public/css',
+          to: path+'/css',
+      },
+    ])
+  });
+
+  return copy;
 }
 
 module.exports = {
@@ -35,10 +56,25 @@ module.exports = {
           'postcss-loader',
           'sass-loader'
         ]
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: '../css/fonts/'
+            }
+          }
+        ]
       }
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: '../css/laraberg.css' })
+    new MiniCssExtractPlugin({ filename: '../css/laraberg.css' }),
+    new CopyPlugin({
+      patterns: copyFiles(),
+    }),
   ]
 }

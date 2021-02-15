@@ -6,7 +6,7 @@ import setupLaravelFilemanager from '../laravel-filemanager'
 import setupMockFilemanager from '../mock-file-uploader'
 import setupActions from './actions'
 
-const { data } = window.wp
+const { data, blocks } = window.wp
 
 /**
  * Configures the editor according to the provided options object
@@ -18,6 +18,7 @@ export default function configureEditor (options) {
   setupSidebar(options)
   setupSubmit(editorSettings.target)
   disableWPBlocks()
+  whitelistEmbded()
   removeElements()
   if (options.maxHeight) { setMaxHeight(options.maxHeight) }
   if (options.minHeight) { setMinHeight(options.minHeight) }
@@ -53,8 +54,29 @@ function disableWPBlocks () {
     'core/calendar',
     'core/rss',
     'core/search',
-    'core/tag-cloud'
-  ])
+    'core/tag-cloud',
+    'core/verse',
+  ]);
+}
+
+function whitelistEmbded () {
+  const allowedEmbedBlocks = [
+    'embed',
+    'vimeo',
+    'youtube',
+    'instagram',
+    'facebook',
+  ];
+
+  data.select('core/blocks').getBlockTypes().forEach(function (blockVariation) {
+    let name = blockVariation.name,
+        postfix = name.split('/')[1];
+
+    //Unregister non-whitelisted embded blocks
+    if ( name.substr(0, 10) == 'core-embed' && allowedEmbedBlocks.indexOf(postfix) == -1 ) {
+        blocks.unregisterBlockType(blockVariation.name);
+    }
+  });
 }
 
 /**
