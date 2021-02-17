@@ -1,8 +1,8 @@
 <?php
 
-namespace VanOns\Laraberg\Helpers;
+namespace Admin\Gutenberg\Helpers;
 
-use VanOns\Laraberg\Models\Block;
+use Admin\Gutenberg\Models\Block;
 
 class SocialHelper
 {

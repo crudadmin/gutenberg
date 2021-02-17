@@ -1,6 +1,6 @@
 <?php
 
-namespace VanOns\Laraberg\Fields\Mutations;
+namespace Admin\Gutenberg\Fields\Mutations;
 
 use Admin\Core\Fields\Mutations\MutationRule;
 

@@ -1,8 +1,12 @@
 {
     "name": "crudadmin/gutenberg",
-    "description": "A Gutenberg implementation for Laravel",
+    "description": "This package is fork from laraberg package. To supports field in crudadmin framework.",
     "license": "GPL-3.0-or-later",
     "authors": [
+        {
+            "name": "Marek Gogol",
+            "email": "info@marekgogol.sk"
+        },
         {
             "name": "Maurice Wijnia",
             "email": "maurice@van-ons.nl"
@@ -17,17 +21,17 @@
     },
     "autoload": {
         "psr-4": {
-            "VanOns\\Laraberg\\": "src"
+            "Admin\\Gutenberg\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VanOns\\Laraberg\\Test\\": "tests"
+            "Admin\\Gutenberg\\Test\\": "tests"
         }
     },
     "extra": {
         "laravel": {
-            "providers": "VanOns\\Laraberg\\LarabergServiceProvider"
+            "providers": "Admin\\Gutenberg\\GutenbergServiceProvider"
         }
     }
 

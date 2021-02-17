@@ -1,7 +1,7 @@
 <?php
 
-use VanOns\Laraberg\Models\Block;
-use VanOns\Laraberg\Models\Content;
+use Admin\Gutenberg\Models\Block;
+use Admin\Gutenberg\Models\Content;
 
 return [
     /*
@@ -20,5 +20,5 @@ return [
         "block" => Block::class,
         "content" => Content::class,
     ],
-    
+
 ];

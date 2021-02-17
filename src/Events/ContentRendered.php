@@ -1,10 +1,10 @@
 <?php
 
-namespace VanOns\Laraberg\Events;
+namespace Admin\Gutenberg\Events;
 
 use Illuminate\Queue\SerializesModels;
 
-use VanOns\Laraberg\Models\Content;
+use Admin\Gutenberg\Models\Content;
 
 class ContentRendered
 {
@@ -14,8 +14,8 @@ class ContentRendered
 
     /**
      * Create a new event instance
-     * 
-     * @param VanOns\Laraberg\Models\Content $content
+     *
+     * @param Admin\Gutenberg\Models\Content $content
      * @return void
      */
     public function __construct(Content $content)
@@ -23,4 +23,3 @@ class ContentRendered
         $this->content = $content;
     }
 }
-

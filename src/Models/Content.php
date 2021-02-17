@@ -1,14 +1,14 @@
 <?php
 
-namespace VanOns\Laraberg\Models;
+namespace Admin\Gutenberg\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use mysql_xdevapi\Exception;
-use VanOns\Laraberg\Helpers\EmbedHelper;
-use VanOns\Laraberg\Helpers\BlockHelper;
-use VanOns\Laraberg\Events\ContentCreated;
-use VanOns\Laraberg\Events\ContentUpdated;
-use VanOns\Laraberg\Events\ContentRendered;
+use Admin\Gutenberg\Helpers\EmbedHelper;
+use Admin\Gutenberg\Helpers\BlockHelper;
+use Admin\Gutenberg\Events\ContentCreated;
+use Admin\Gutenberg\Events\ContentUpdated;
+use Admin\Gutenberg\Events\ContentRendered;
 
 class Content extends Model
 {

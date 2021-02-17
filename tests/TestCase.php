@@ -1,9 +1,9 @@
 <?php
 
-namespace VanOns\Laraberg\Test;
+namespace Admin\Gutenberg\Test;
 
-use VanOns\Laraberg\LarabergFacade;
-use VanOns\Laraberg\LarabergServiceProvider;
+use Admin\Gutenberg\GunebergFacade;
+use Admin\Gutenberg\GutenbergServiceProvider;
 use Orchestra\Testbench\Testcase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase
@@ -11,11 +11,11 @@ class TestCase extends OrchestraTestCase
     /**
      * Load package service provider
      * @param  \Illuminate\Foundation\Application $app
-     * @return VanOns\Laraberg\LarabergServiceProvider
+     * @return Admin\Gutenberg\GutenbergServiceProvider
      */
     protected function getPackageProviders($app)
     {
-        return [LarabergServiceProvider::class];
+        return [GutenbergServiceProvider::class];
     }
     /**
      * Load package alias
@@ -25,7 +25,7 @@ class TestCase extends OrchestraTestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Laraberg' => LarabergFacade::class,
+            'Guneberg' => GunebergFacade::class,
         ];
     }
 }

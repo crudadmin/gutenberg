@@ -1,13 +1,13 @@
 <?php
 
-namespace VanOns\Laraberg\Eloquent\Modules;
+namespace Admin\Gutenberg\Eloquent\Modules;
 
 use Admin;
 use Admin\Core\Eloquent\Concerns\AdminModelFieldValue;
 use Admin\Core\Eloquent\Concerns\AdminModelModule;
 use Admin\Core\Eloquent\Concerns\AdminModelModuleSupport;
-use VanOns\Laraberg\Helpers\EmbedHelper;
-use VanOns\Laraberg\Helpers\SocialHelper;
+use Admin\Gutenberg\Helpers\EmbedHelper;
+use Admin\Gutenberg\Helpers\SocialHelper;
 
 class GutenbergModule extends AdminModelModule implements AdminModelModuleSupport
 {

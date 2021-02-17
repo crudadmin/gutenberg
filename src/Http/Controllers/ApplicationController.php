@@ -1,6 +1,6 @@
 <?php
 
-namespace VanOns\Laraberg\Http\Controllers;
+namespace Admin\Gutenberg\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 
@@ -21,4 +21,3 @@ class ApplicationController extends BaseController
         return response($data, $code)->header('Content-Type', 'application/json');
     }
 }
-

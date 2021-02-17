@@ -1,6 +1,6 @@
 <?php
 
-namespace VanOns\Laraberg\Helpers;
+namespace Admin\Gutenberg\Helpers;
 
 use Embed\Embed;
 
@@ -53,4 +53,3 @@ class EmbedHelper
         return Embed::create($url);
     }
 }
-

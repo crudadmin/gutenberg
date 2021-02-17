@@ -1,15 +1,15 @@
 <?php
 
-namespace VanOns\Laraberg;
+namespace Admin\Gutenberg;
 
 use Admin\Core\Eloquent\AdminModel;
 use Fields;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use VanOns\Laraberg\Eloquent\Modules\GutenbergModule;
-use VanOns\Laraberg\Fields\Mutations\AddGutenbergRawColumn;
+use Admin\Gutenberg\Eloquent\Modules\GutenbergModule;
+use Admin\Gutenberg\Fields\Mutations\AddGutenbergRawColumn;
 
-class LarabergServiceProvider extends ServiceProvider
+class GutenbergServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -50,4 +50,3 @@ class LarabergServiceProvider extends ServiceProvider
         $this->app->alias(Laraberg::class, 'laraberg');
     }
 }
-

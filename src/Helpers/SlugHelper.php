@@ -1,13 +1,13 @@
 <?php
 
-namespace VanOns\Laraberg\Helpers;
+namespace Admin\Gutenberg\Helpers;
 
 class SlugHelper
 {
     /**
      * Generates a slug from the provided text
      * @param String $text
-     * 
+     *
      * @return String slug
      */
     public static function slugify($text)
@@ -37,4 +37,3 @@ class SlugHelper
         return $text;
     }
 }
-

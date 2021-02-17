@@ -1,19 +1,19 @@
 <?php
 
-namespace VanOns\Laraberg\Models;
+namespace Admin\Gutenberg\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use VanOns\Laraberg\Helpers\BlockHelper;
-use VanOns\Laraberg\Helpers\EmbedHelper;
-use VanOns\Laraberg\Helpers\SlugHelper;
+use Admin\Gutenberg\Helpers\BlockHelper;
+use Admin\Gutenberg\Helpers\EmbedHelper;
+use Admin\Gutenberg\Helpers\SlugHelper;
 
 class Block extends Model
 {
     protected $table = 'lb_blocks';
     protected $appends = ['content', 'title'];
     protected $hidden = [
-        'created_at', 
+        'created_at',
         'raw_content',
         'raw_title',
         'rendered_content',
@@ -85,4 +85,3 @@ class Block extends Model
         ];
     }
 }
-

@@ -1,9 +1,9 @@
 <?php
 
-namespace VanOns\Laraberg\Http\Controllers;
+namespace Admin\Gutenberg\Http\Controllers;
 
 use Illuminate\Http\Request;
-use VanOns\Laraberg\Helpers\EmbedHelper;
+use Admin\Gutenberg\Helpers\EmbedHelper;
 
 class OEmbedController extends ApplicationController
 {
