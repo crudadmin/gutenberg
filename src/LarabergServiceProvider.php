@@ -3,9 +3,11 @@
 namespace VanOns\Laraberg;
 
 use Admin\Core\Eloquent\AdminModel;
+use Fields;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use VanOns\Laraberg\Eloquent\Modules\GutenbergModule;
-use Illuminate\Support\Facades\Blade;
+use VanOns\Laraberg\Fields\Mutations\AddGutenbergRawColumn;
 
 class LarabergServiceProvider extends ServiceProvider
 {
@@ -16,14 +18,22 @@ class LarabergServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //Register publishes
         $this->publishes([__DIR__ . '/config/laraberg.php' => config_path('laraberg.php')], 'config');
-        require __DIR__ . '/Http/routes.php';
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
         $this->publishes([__DIR__ . '/../public' => public_path('vendor/laraberg')], 'public');
 
+        //Register routes
+        require __DIR__ . '/Http/routes.php';
+
+        //Register blade directive
         Blade::directive('gutenberg', function ($model) {
             return '<link rel="stylesheet" type="text/css" href="<?php echo asset("vendor/laraberg/css/laraberg.css") ?>">';
         });
+
+        //Register admin field mutation
+        Fields::addMutation([
+            AddGutenbergRawColumn::class,
+        ]);
     }
     /**
      * Register the application services.
