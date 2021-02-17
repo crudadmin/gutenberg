@@ -42,11 +42,39 @@ class GutenbergServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeAdminConfigs();
+
         AdminModel::addGlobalModule(GutenbergModule::class);
 
         $this->app->singleton(Laraberg::class, function () {
             return new Laraberg();
         });
+
         $this->app->alias(Laraberg::class, 'laraberg');
     }
+
+    /*
+     * Merge crudadmin config with esolutions config
+     */
+    private function mergeAdminConfigs($key = 'admin')
+    {
+        //Additional CrudAdmin Config
+        $crudAdminConfig = require __DIR__.'/config/admin.php';
+
+        $config = $this->app['config']->get($key, []);
+
+        $this->app['config']->set($key, array_merge($crudAdminConfig, $config));
+
+        //Merge selected properties with one/two dimensional array
+        foreach (['models', 'custom_rules', 'global_rules', 'gettext_source_paths', 'gettext_admin_source_paths'] as $property) {
+            if (! array_key_exists($property, $crudAdminConfig) || ! array_key_exists($property, $config)) {
+                continue;
+            }
+
+            $attributes = array_merge($config[$property], $crudAdminConfig[$property]);
+
+            $this->app['config']->set($key.'.'.$property, $attributes);
+        }
+    }
+
 }
