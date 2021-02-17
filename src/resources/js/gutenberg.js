@@ -7,7 +7,9 @@ import init from './gutenberg/init'
 import { getContent, setContent } from './lib/content'
 import { registerBlock, registerCategory } from './lib/custom-blocks'
 
-const Laraberg = {
+const Gutenberg = {
+  blocks : [],
+  categories : [],
   init: init,
   initGutenberg: init,
   getContent: getContent,
@@ -17,6 +19,6 @@ const Laraberg = {
   registerBlock: registerBlock
 }
 
-window.Gutenberg = Laraberg
+window.Gutenberg = Gutenberg
 
-export default Laraberg
+export default Gutenberg

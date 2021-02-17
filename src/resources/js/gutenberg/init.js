@@ -28,7 +28,8 @@ export default function init (target, options = {}) {
       const larabergEditor = createEditorElement(target)
       try {
         resolve(editPost.initializeEditor(larabergEditor.id, 'page', 1, getEditorSettings(), overridePost))
-        fixReusableBlocks()
+        registerCustomBlocks();
+        fixReusableBlocks();
       } catch (error) {
         console.error(error)
       }
@@ -52,9 +53,29 @@ function createEditorElement (target) {
   element.hidden = true
 
   editorSettings.target = target
+
   window.Gutenberg.editor = editor
 
   return editor
+}
+
+function registerCustomBlocks(){
+  window.Gutenberg.categories.forEach(({slug, title}) => {
+    let category = {
+      slug: slug,
+      title: title
+    }
+
+    const currentCategories = data.select('core/blocks')
+                                  .getCategories()
+                                  .filter(item => item.slug !== category.slug);
+
+    data.dispatch('core/blocks').setCategories([ category, ...currentCategories ])
+  });
+
+   window.Gutenberg.blocks.forEach(({name, block}) => {
+      registerBlockType(name, block)
+  })
 }
 
 function fixReusableBlocks () {
@@ -65,7 +86,7 @@ function fixReusableBlocks () {
       type: 'number'
     }
   }
-  registerBlockType('core/block', coreBlock)
+  registerBlockType('core/block', coreBlock);
 }
 
 function getEditorSettings() {

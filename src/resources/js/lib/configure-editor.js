@@ -177,4 +177,9 @@ function removeElements () {
   elementRendered('.editor-post-trash', element => { element.remove() })
 
   elementRendered('.editor-post-saved-state', element => { element.style.display = 'none' })
+
+  //Toolbar fix... but double click bug is still present
+  elementRendered('.components-accessible-toolbar', element => {
+    element.className = element.className.replace('components-accessible-toolbar', '');
+  })
 }
