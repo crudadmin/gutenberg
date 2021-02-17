@@ -23,6 +23,7 @@ export default function configureEditor (options) {
   if (options.maxHeight) { setMaxHeight(options.maxHeight) }
   if (options.minHeight) { setMinHeight(options.minHeight) }
   if (options.height) { setHeight(options.height) }
+  if (options.onBoot) { options.onBoot() }
 }
 
 /**
@@ -84,7 +85,7 @@ function whitelistEmbded () {
  * @param {String} maxHeight css value for max-height
  */
 function setMaxHeight (maxHeight) {
-  const editor = window.Laraberg.editor
+  const editor = window.Gutenberg.editor
   editor.style.maxHeight = maxHeight
 
   elementRendered('.edit-post-layout__content', (el) => {
@@ -97,7 +98,7 @@ function setMaxHeight (maxHeight) {
  * @param {String} minHeight css value for min-height
  */
 function setMinHeight (minHeight) {
-  const editor = window.Laraberg.editor
+  const editor = window.Gutenberg.editor
   editor.style.minHeight = minHeight
 
   elementRendered('.edit-post-sidebar', (el) => {
@@ -110,7 +111,7 @@ function setMinHeight (minHeight) {
  * @param {String} height css value for height
  */
 function setHeight (height) {
-  const editor = window.Laraberg.editor
+  const editor = window.Gutenberg.editor
   editor.classList.add('fixed-height')
   editor.style.height = height
 }

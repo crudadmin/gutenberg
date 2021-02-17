@@ -52,7 +52,7 @@ function createEditorElement (target) {
   element.hidden = true
 
   editorSettings.target = target
-  window.Laraberg.editor = editor
+  window.Gutenberg.editor = editor
 
   return editor
 }

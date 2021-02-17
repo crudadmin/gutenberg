@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const config = require('./config.js');
 
@@ -30,9 +31,9 @@ const copyFiles = () => {
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './src/resources/js/laraberg.js',
+  entry: './src/resources/js/gutenberg.js',
   output: {
-    filename: 'laraberg.js',
+    filename: 'gutenberg.js',
     path: path.resolve(__dirname, 'public/js')
   },
   devtool: 'source-map',
@@ -72,9 +73,10 @@ module.exports = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: '../css/laraberg.css' }),
+    new MiniCssExtractPlugin({ filename: '../css/gutenberg.css' }),
+    new CssMinimizerPlugin(),
     new CopyPlugin({
       patterns: copyFiles(),
     }),
-  ]
+  ],
 }
