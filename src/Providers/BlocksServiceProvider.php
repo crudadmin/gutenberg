@@ -38,13 +38,13 @@ class BlocksServiceProvider extends ServiceProvider
             );
 
             return $block_content;
-        }, 1, 2);
+        }, -1, 2);
     }
 
     private function addSocialBlock()
     {
         add_filter('render_block_core/social-link', function($block_content, $block) {
             return gutenberg_render_block_core_social_link($block['attrs']);
-        }, 1, 2);
+        }, -1, 2);
     }
 }
