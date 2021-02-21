@@ -48,7 +48,9 @@ export const editorSettings = {
   postLock: {
     isLocked: false
   },
-  autosaveInterval: 9999
+  autosaveInterval: 9999,
+  //boot callback
+  onBoot : null,
 }
 
 // Post properties to override

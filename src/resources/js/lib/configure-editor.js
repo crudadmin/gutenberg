@@ -24,6 +24,8 @@ export default function configureEditor (options) {
   if (options.minHeight) { setMinHeight(options.minHeight) }
   if (options.height) { setHeight(options.height) }
   if (options.onBoot) { options.onBoot() }
+
+  window.Gutenberg.onBoot.forEach(callback => callback(options));
 }
 
 /**

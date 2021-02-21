@@ -10,8 +10,16 @@ const { unregisterBlockType, registerBlockType, getBlockType } = blocks
  * Initialize the Gutenberg editor
  * @param {string} target the element ID to render the gutenberg editor in
  */
-export default function init (target, options = {}) {
-  configureAPI(options)
+export default async function init(target, options = {}) {
+  configureAPI(options);
+
+  //We need boot all additional data required for editor blocks...
+  //We will wait till data will be loaded
+  for ( var i = 0; i < window.Gutenberg.beforeBoot.length; i++ ) {
+    let callback = window.Gutenberg.beforeBoot[i];
+
+    await callback();
+  }
 
   // Toggle features
   const { toggleFeature } = data.dispatch('core/edit-post');

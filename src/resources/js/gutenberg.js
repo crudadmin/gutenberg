@@ -16,7 +16,9 @@ const Gutenberg = {
   setContent: setContent,
   editor: null,
   registerCategory: registerCategory,
-  registerBlock: registerBlock
+  registerBlock: registerBlock,
+  beforeBoot : [],
+  onBoot : [],
 }
 
 window.Gutenberg = Gutenberg
