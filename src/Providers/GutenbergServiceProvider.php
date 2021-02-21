@@ -43,8 +43,8 @@ class GutenbergServiceProvider extends AdminHelperServiceProvider
     public function boot()
     {
         //Register publishes
-        // $this->publishes([__DIR__ . '/config/laraberg.php' => config_path('laraberg.php')], 'config');
-        $this->publishes([__DIR__ . '/../public' => public_path('vendor/gutenberg')], 'public');
+        // $this->publishes([realpath(__DIR__ . '/../config/laraberg.php') => config_path('laraberg.php')], 'config');
+        $this->publishes([realpath(__DIR__ . '/../../public') => public_path('vendor/gutenberg')], 'public');
 
         //Register routes
         require __DIR__ . '/../Http/routes.php';
