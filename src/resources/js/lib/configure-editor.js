@@ -121,7 +121,6 @@ function setHeight (height) {
  * @param {Object} options the options object provided on initialization
  */
 function setupMedia (options) {
-  removeUploadButton()
   if (options.laravelFilemanager) {
     setupLaravelFilemanager(options.laravelFilemanager)
   } else {
@@ -153,13 +152,6 @@ function setupSubmit (target) {
       return true
     })
   }
-}
-
-/**
- * Removes the default upload button from media blocks
- */
-function removeUploadButton () {
-  elementRendered('.components-form-file-upload button', element => element.remove())
 }
 
 /**

@@ -223,8 +223,21 @@ async function getEmbed (options, matches) {
 /**
  * Handle unsupported media upload request
  */
-async function postMedia () {
-  Notices.error('Drag & drop file uploads are not supported yet.')
+async function postMedia (options) {
+  try {
+    var response = await axios.post(`${routePrefix}/image-upload`, options.body)
+                                .then(response => response.data);
+
+    if ( response.error ) {
+        Notices.error(response.error);
+    }
+
+    return response;
+  } catch (e) {
+      console.error('Unknown error occured during upload.', e);
+      Notices.error('Unknown error occured during upload.');
+  }
+
   // We need to return those values to prevent additional error messages
   return {
     caption: {},

@@ -74,9 +74,9 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: '../css/gutenberg.css' }),
-    new CssMinimizerPlugin(),
+    process.env.NODE_ENV == 'development' ? null : new CssMinimizerPlugin(),
     new CopyPlugin({
       patterns: copyFiles(),
     }),
-  ],
+  ].filter(item => item),
 }

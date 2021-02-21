@@ -30,6 +30,7 @@ export default function (config) {
         url: url,
         type: this.getMediaType(path)
       }
+
       if (multiple) { this.state.media.push(media) }
       onSelect(multiple ? this.state.media : media)
     }
@@ -46,9 +47,9 @@ export default function (config) {
       const routePrefix = (config && config.prefix) ? config.prefix : '/filemanager'
       window.open(routePrefix + '?type=' + type, 'FileManager', 'width=900,height=600')
       window.SetUrl = function (items) {
-        if (items[0]) {
-          cb(items[0].url, items[0].name)
-        }
+        items.forEach(item => {
+          cb(item.url, item.name)
+        })
       }
     }
 
