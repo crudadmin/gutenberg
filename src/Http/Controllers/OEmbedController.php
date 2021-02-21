@@ -3,17 +3,18 @@
 namespace Admin\Gutenberg\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Admin\Gutenberg\Helpers\EmbedHelper;
+use Admin\Gutenberg\Contracts\Blocks\EmbedHelper;
 
 class OEmbedController extends ApplicationController
 {
     public function __invoke(Request $request)
     {
-        $embed = EmbedHelper::create($request->url);
-        $data = EmbedHelper::serialize($embed);
+        $data = EmbedHelper::create($request->url);
+
         if ($data['html'] == null) {
             return $this->notFound();
         }
+
         return $this->ok($data);
     }
 }

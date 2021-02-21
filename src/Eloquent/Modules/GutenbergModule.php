@@ -6,21 +6,10 @@ use Admin;
 use Admin\Core\Eloquent\Concerns\AdminModelFieldValue;
 use Admin\Core\Eloquent\Concerns\AdminModelModule;
 use Admin\Core\Eloquent\Concerns\AdminModelModuleSupport;
-use Admin\Gutenberg\Helpers\EmbedHelper;
-use Admin\Gutenberg\Helpers\SocialHelper;
+use Admin\Gutenberg\Contracts\Blocks\BlocksBuilder;
 
 class GutenbergModule extends AdminModelModule implements AdminModelModuleSupport
 {
-    static $blockMutators = [
-        EmbedHelper::class,
-        SocialHelper::class,
-    ];
-
-    public static function addBlockMutator($class)
-    {
-        self::$blockMutators = $class;
-    }
-
     public function isActive($model)
     {
         return true;
@@ -28,16 +17,16 @@ class GutenbergModule extends AdminModelModule implements AdminModelModuleSuppor
 
     public function fieldValue($model, $key, $field, $value)
     {
-        if ( in_array($field['type'], ['gutenberg']) && substr($key, -9) !== '_rendered' ) {
-            $renderedKey = $key.'_rendered';
-
-            $value = $model->__get($renderedKey);
-
+        if ( in_array($field['type'], ['gutenberg']) ) {
             if ($model->hasFieldParam($key, ['locale'], true)) {
                 $value = $model->returnLocaleValue($value);
             }
 
-            return new AdminModelFieldValue($value);
+            $builder = new BlocksBuilder($value);
+
+            return new AdminModelFieldValue(
+                $builder->render()
+            );
         }
     }
 
@@ -51,11 +40,9 @@ class GutenbergModule extends AdminModelModule implements AdminModelModuleSuppor
         foreach ($fields as $key => $field) {
             //Allow remove only "removed" fields from dom.
             if ( $model->isFieldType($key, 'gutenberg') ) {
-                $renderedKey = $key.'_rendered';
-
-                if ( array_key_exists($renderedKey, $fields) ) {
+                if ( array_key_exists($key, $fields) ) {
                     $request->replace($request->all() + [
-                        $renderedKey => $this->renderValue(
+                        $key => $this->renderRawContentValue(
                             $request->get($key)
                         )
                     ]);
@@ -64,12 +51,11 @@ class GutenbergModule extends AdminModelModule implements AdminModelModuleSuppor
         }
     }
 
-    private function renderValue($value)
+    /*
+     * We can mutate send request, but now we are doing nothing
+     */
+    private function renderRawContentValue($value)
     {
-        foreach (self::$blockMutators as $mutator) {
-            $value = $mutator::render($value);
-        }
-
         return $value;
     }
 }

@@ -415,7 +415,7 @@ export default function apiFetch (options) {
 }
 
 export function configureAPI (options) {
-  routePrefix = options.prefix || '/laraberg'
+  routePrefix = options.prefix || '/admin/gutenberg'
   searchCb = options.searchCb || null
 }
 
