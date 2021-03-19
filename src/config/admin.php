@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'gutenberg_wrapper_class' => 'crudadmin-gutenberg-wrapper',
+
     /*
      * Global rules on fields type
      */

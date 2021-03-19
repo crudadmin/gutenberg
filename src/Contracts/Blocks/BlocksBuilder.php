@@ -24,6 +24,11 @@ class BlocksBuilder
         self::$blockMutators = $class;
     }
 
+    private function getWrapperClass()
+    {
+        return config('admin.gutenberg_wrapper_class');
+    }
+
     /**
      * Renders any blocks in the HTML (recursively)
      */
@@ -37,6 +42,6 @@ class BlocksBuilder
             $content[] = (new \WP_Block($blockData))->render();
         }
 
-        return implode('', $content);
+        return '<div class="'.$this->getWrapperClass().'">'.implode('', $content).'</div>';
     }
 }
