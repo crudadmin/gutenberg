@@ -8,17 +8,32 @@ import { getContent, setContent } from './lib/content'
 import { registerBlock, registerCategory } from './lib/custom-blocks'
 
 const Gutenberg = {
-  blocks : [],
-  categories : [],
+  //Api
+  registerCategory: registerCategory,
+  registerBlock: registerBlock,
   init: init,
   initGutenberg: init,
   getContent: getContent,
   setContent: setContent,
-  editor: null,
-  registerCategory: registerCategory,
-  registerBlock: registerBlock,
+
+  //This blocks will be unregister on editor boot
+  unregister_blocks : [],
+  blocks : [],
+  categories : [],
+
+  //Boot callback events
   beforeBoot : [],
   onBoot : [],
+
+  //Mutate configuration with callback functions
+  configure : [
+    (options) => {
+      return options;
+    }
+  ],
+
+  //Core propertie
+  editor: null,
 }
 
 window.Gutenberg = Gutenberg

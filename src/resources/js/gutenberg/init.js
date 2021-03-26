@@ -98,11 +98,16 @@ function fixReusableBlocks () {
 }
 
 function getEditorSettings() {
-  const targetElement = document.getElementById(editorSettings.target)
+  let options = editorSettings,
+      targetElement = document.getElementById(options.target);
 
   if (targetElement && targetElement.placeholder) {
-    editorSettings.bodyPlaceholder = targetElement.placeholder
+    options.bodyPlaceholder = targetElement.placeholder
   }
 
-  return editorSettings
+  window.Gutenberg.configure.forEach(callback => {
+    options = callback(options);
+  })
+
+  return options
 }

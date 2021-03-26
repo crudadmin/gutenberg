@@ -44,7 +44,7 @@ export function clearSubmitFromButtons () {
 }
 
 function disableWPBlocks () {
-  data.dispatch('core/blocks').removeBlockTypes([
+  let unregister = [
     'core/archives',
     'core/categories',
     'core/freeform',
@@ -59,7 +59,9 @@ function disableWPBlocks () {
     'core/search',
     'core/tag-cloud',
     'core/verse',
-  ]);
+  ].concat(window.Gutenberg.unregister_blocks||[]);
+
+  data.dispatch('core/blocks').removeBlockTypes(unregister);
 }
 
 function whitelistEmbded () {
@@ -162,6 +164,9 @@ function setupSubmit (target) {
 function removeElements () {
   // Manage All Reusable blocks
   elementRendered('[href="edit.php?post_type=wp_block"]', element => { element.remove() })
+
+  //Preview
+  elementRendered('.block-editor-post-preview__dropdown', element => { element.style.display = 'none' })
 
   // Publish button
   elementRendered('.editor-post-publish-button', element => { element.style.display = 'none' })
