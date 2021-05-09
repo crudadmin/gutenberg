@@ -12,7 +12,7 @@ class ImageUploadController extends ApplicationController
     {
         $file = request()->file;
 
-        if ( !in_array($file->getMimeType(), ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']) ){
+        if ( !in_array($file->getMimeType(), ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/svg+xml']) ){
             return [
                 'error' => _('Only image types are available for upload')
             ];
