@@ -22,20 +22,23 @@ class BlocksServiceProvider extends ServiceProvider
     {
         add_filter('render_block', function($block_content, $block) {
             //Filter only embed blocks
-            if ( strpos($block['blockName'], 'core-embed/') === false ) {
+            if (
+                strpos($block['blockName'], 'core-embed/') !== false
+                || strpos($block['blockName'], 'core/embed') !== false
+            ) {
+                $url = $block['attrs']['url'];
+
+                $embed = EmbedHelper::create($url);
+
+                //Replace video
+                $block_content = str_replace(
+                    $url,
+                    $embed['html'] ?? null,
+                    $block_content
+                );
+
                 return $block_content;
             }
-
-            $url = $block['attrs']['url'];
-
-            $embed = EmbedHelper::create($url);
-
-            //Replace video
-            $block_content = str_replace(
-                $url,
-                $embed['html'] ?? null,
-                $block_content
-            );
 
             return $block_content;
         }, -1, 2);

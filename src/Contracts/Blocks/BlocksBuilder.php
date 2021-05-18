@@ -9,19 +9,9 @@ class BlocksBuilder
 {
     private $html;
 
-    static $blockMutators = [
-        EmbedBlock::class,
-        SocialBlock::class,
-    ];
-
     public function __construct($html)
     {
         $this->html = $html;
-    }
-
-    public static function addBlockMutator($class)
-    {
-        self::$blockMutators = $class;
     }
 
     private function getWrapperClass()
