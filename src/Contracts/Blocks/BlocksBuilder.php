@@ -37,6 +37,10 @@ class BlocksBuilder
      */
     public function render()
     {
-        return '<div class="'.$this->getWrapperClass().'">'.implode('', $this->renderBlocks()).'</div>';
+        if ( !($content = implode('', $this->renderBlocks())) ) {
+            return;
+        }
+
+        return '<div class="'.$this->getWrapperClass().'">'.$content.'</div>';
     }
 }
