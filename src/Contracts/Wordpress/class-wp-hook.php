@@ -70,6 +70,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *                                  in which they were added to the action.
      * @param int      $accepted_args   The number of arguments the function accepts.
      */
+    #[ReturnTypeWillChange]
     public function add_filter( $tag, $function_to_add, $priority, $accepted_args ) {
         $idx = _wp_filter_build_unique_id( $tag, $function_to_add, $priority );
 
@@ -168,6 +169,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      * @param int      $priority           The exact priority used when adding the original filter callback.
      * @return bool Whether the callback existed before it was removed.
      */
+    #[ReturnTypeWillChange]
     public function remove_filter( $tag, $function_to_remove, $priority ) {
         $function_key = _wp_filter_build_unique_id( $tag, $function_to_remove, $priority );
 
@@ -198,6 +200,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *                  anything registered. When checking a specific function, the priority of that
      *                  hook is returned, or false if the function is not attached.
      */
+    #[ReturnTypeWillChange]
     public function has_filter( $tag = '', $function_to_check = false ) {
         if ( false === $function_to_check ) {
             return $this->has_filters();
@@ -224,6 +227,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *
      * @return bool True if callbacks have been registered for the current hook, otherwise false.
      */
+    #[ReturnTypeWillChange]
     public function has_filters() {
         foreach ( $this->callbacks as $callbacks ) {
             if ( $callbacks ) {
@@ -240,6 +244,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *
      * @param int|false $priority Optional. The priority number to remove. Default false.
      */
+    #[ReturnTypeWillChange]
     public function remove_all_filters( $priority = false ) {
         if ( ! $this->callbacks ) {
             return;
@@ -266,6 +271,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *                     This array is expected to include $value at index 0.
      * @return mixed The filtered value after all hooked functions are applied to it.
      */
+    #[ReturnTypeWillChange]
     public function apply_filters( $value, $args ) {
         if ( ! $this->callbacks ) {
             return $value;
@@ -311,6 +317,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *
      * @param array $args Parameters to pass to the callback functions.
      */
+    #[ReturnTypeWillChange]
     public function do_action( $args ) {
         $this->doing_action = true;
         $this->apply_filters( '', $args );
@@ -328,6 +335,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *
      * @param array $args Arguments to pass to the hook callbacks. Passed by reference.
      */
+    #[ReturnTypeWillChange]
     public function do_all_hook( &$args ) {
         $nesting_level                      = $this->nesting_level++;
         $this->iterations[ $nesting_level ] = array_keys( $this->callbacks );
@@ -350,6 +358,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *
      * @return int|false If the hook is running, return the current priority level. If it isn't running, return false.
      */
+    #[ReturnTypeWillChange]
     public function current_priority() {
         if ( false === current( $this->iterations ) ) {
             return false;
@@ -421,6 +430,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      * @param mixed $offset An offset to check for.
      * @return bool True if the offset exists, false otherwise.
      */
+    #[ReturnTypeWillChange]
     public function offsetExists( $offset ) {
         return isset( $this->callbacks[ $offset ] );
     }
@@ -435,6 +445,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      * @param mixed $offset The offset to retrieve.
      * @return mixed If set, the value at the specified offset, null otherwise.
      */
+    #[ReturnTypeWillChange]
     public function offsetGet( $offset ) {
         return isset( $this->callbacks[ $offset ] ) ? $this->callbacks[ $offset ] : null;
     }
@@ -449,6 +460,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      * @param mixed $offset The offset to assign the value to.
      * @param mixed $value The value to set.
      */
+    #[ReturnTypeWillChange]
     public function offsetSet( $offset, $value ) {
         if ( is_null( $offset ) ) {
             $this->callbacks[] = $value;
@@ -466,6 +478,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *
      * @param mixed $offset The offset to unset.
      */
+    #[ReturnTypeWillChange]
     public function offsetUnset( $offset ) {
         unset( $this->callbacks[ $offset ] );
     }
@@ -479,6 +492,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *
      * @return array Of callbacks at current priority.
      */
+    #[ReturnTypeWillChange]
     public function current() {
         return current( $this->callbacks );
     }
@@ -492,6 +506,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *
      * @return array Of callbacks at next priority.
      */
+    #[ReturnTypeWillChange]
     public function next() {
         return next( $this->callbacks );
     }
@@ -505,6 +520,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *
      * @return mixed Returns current priority on success, or NULL on failure
      */
+    #[ReturnTypeWillChange]
     public function key() {
         return key( $this->callbacks );
     }
@@ -518,6 +534,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *
      * @return bool Whether the current position is valid.
      */
+    #[ReturnTypeWillChange]
     public function valid() {
         return key( $this->callbacks ) !== null;
     }
@@ -529,6 +546,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
      *
      * @link https://www.php.net/manual/en/iterator.rewind.php
      */
+    #[ReturnTypeWillChange]
     public function rewind() {
         reset( $this->callbacks );
     }
