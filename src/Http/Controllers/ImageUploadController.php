@@ -35,7 +35,7 @@ class ImageUploadController extends ApplicationController
 
         $filename = str_random(4).'-'.$file->getClientOriginalName();
 
-        $filepath = $file->storeAs($uploadDirectory, $filename, 'crudadmin');
+        $filepath = $file->storeAs($uploadDirectory, $filename, 'crudadmin.uploads');
 
         ImageCompressor::tryShellCompression(
             $path = Storage::disk('crudadmin')->path($filepath)
