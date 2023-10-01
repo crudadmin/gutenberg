@@ -23,7 +23,7 @@
         },
         "files": [
             "src/Contracts/Wordpress/boot.php",
-            "src/helpers/blocks.php"
+            "src/Helpers/blocks.php"
         ]
     },
     "autoload-dev": {
