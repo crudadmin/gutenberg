@@ -19,6 +19,10 @@ class GutenbergServiceProvider extends AdminHelperServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/laraberg.php', 'laraberg'
+        );
+
         $this->mergeAdminConfigs(
             require __DIR__.'/../config/admin.php'
         );

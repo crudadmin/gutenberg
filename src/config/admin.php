@@ -2,6 +2,7 @@
 
 return [
     'gutenberg_wrapper_class' => 'crudadmin-gutenberg-wrapper',
+    'gutenberg_box_class' => 'g-block-wrapper',
 
     /*
      * Global rules on fields type

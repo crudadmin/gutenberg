@@ -26,7 +26,7 @@ class BlocksBuilder
         $rendered = [];
 
         foreach ($blocks as $blockData) {
-            $rendered[] = (new \WP_Block($blockData))->render();
+            $rendered[] = (new \WP_Block($blockData))->render([ 'parent' => true ]);
         }
 
         return $rendered;
