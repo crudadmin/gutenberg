@@ -8,7 +8,7 @@ add_filter('render_block', function($blockContent, $block, $options = []) {
         return $blockContent;
     }
 
-    if ( !trim(strip_tags($blockContent)) ){
+    if ( !trim($blockContent) ){
         return '';
     }
 
