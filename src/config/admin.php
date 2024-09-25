@@ -16,8 +16,8 @@ return [
     ],
 
     'scripts' => [
-        'https://unpkg.com/react@16.8.6/umd/react.production.min.js',
-        'https://unpkg.com/react-dom@16.8.6/umd/react-dom.production.min.js',
-        'vendor/gutenberg/js/gutenberg.js',
+        [ 'src' => 'https://unpkg.com/react@16.8.6/umd/react.production.min.js', 'module' => false ],
+        [ 'src' => 'https://unpkg.com/react-dom@16.8.6/umd/react-dom.production.min.js', 'module' => false ],
+        [ 'src' => 'vendor/gutenberg/js/gutenberg.js', 'module' => false ],
     ],
 ];
