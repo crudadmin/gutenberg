@@ -15,21 +15,6 @@ class GutenbergModule extends AdminModelModule implements AdminModelModuleSuppor
         return true;
     }
 
-    public function fieldValue($model, $key, $field, $value)
-    {
-        if ( in_array($field['type'], ['gutenberg']) ) {
-            if ($model->hasFieldParam($key, ['locale'], true)) {
-                $value = $model->returnLocaleValue($value);
-            }
-
-            $builder = new BlocksBuilder($value);
-
-            return new AdminModelFieldValue(
-                $builder->render()
-            );
-        }
-    }
-
     public function requestMutator($request, $model, $fields, $rules)
     {
         //Allow this feature only in administration
