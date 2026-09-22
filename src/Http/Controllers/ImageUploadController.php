@@ -3,6 +3,7 @@
 namespace Admin\Gutenberg\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use ImageCompressor;
 use Storage;
 
@@ -33,7 +34,7 @@ class ImageUploadController extends ApplicationController
 
         $uploadDirectory = 'editor/images/shared';
 
-        $filename = str_random(4).'-'.$file->getClientOriginalName();
+        $filename = Str::random(4).'-'.$file->getClientOriginalName();
 
         $filepath = $file->storeAs($uploadDirectory, $filename, 'crudadmin.uploads');
 
