@@ -18,10 +18,6 @@ class GutenbergServiceProvider extends AdminHelperServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/laraberg.php', 'laraberg'
-        );
-
         $this->mergeAdminConfigs(
             require __DIR__.'/../config/admin.php'
         );
@@ -43,7 +39,6 @@ class GutenbergServiceProvider extends AdminHelperServiceProvider
     public function boot()
     {
         //Register publishes
-        // $this->publishes([realpath(__DIR__ . '/../config/laraberg.php') => config_path('laraberg.php')], 'config');
         $this->publishes([realpath(__DIR__ . '/../../public') => public_path('vendor/gutenberg')], 'public');
 
         //Register blade directive

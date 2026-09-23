@@ -18,30 +18,10 @@ const requests = {
     regex: /\/wp\/v2\/(.*)\/autosaves\?(.*)/g,
     run: getAutosaves
   },
-  getBlock: {
-    method: 'GET',
-    regex: /\/wp\/v2\/blocks\/(\d*)/g,
-    run: getBlock
-  },
   getBlocks: {
     method: 'GET',
     regex: /\/wp\/v2\/blocks($|[?].*)/g,
     run: getBlocks
-  },
-  postBlocks: {
-    method: 'POST',
-    regex: /\/wp\/v2\/blocks($|[?].*)/g,
-    run: postBlocks
-  },
-  putBlock: {
-    method: 'PUT',
-    regex: /\/wp\/v2\/blocks\/(\d*)/g,
-    run: putBlock
-  },
-  deleteBlock: {
-    method: 'DELETE',
-    regex: /\/wp\/v2\/blocks\/(\d*)/g,
-    run: deleteBlock
   },
   optionsBlocks: {
     method: 'OPTIONS',
@@ -130,82 +110,21 @@ async function getAutosaves () {
 }
 
 /**
- * Get a reusable block
- * @param {Object} options
- * @param {Array} matches
- */
-async function getBlock (options, matches) {
-  // Because of a bug an OPTIONS request to specific resources (by ID) are sent as GET requests
-  // those requests contain a parse property that is set to false
-  if (options.parse === false) {
-    return {
-      headers: {
-        get: value => {
-          if (value === 'allow') {
-            return ['GET', 'POST', 'PUT', 'DELETE']
-          }
-        }
-      }
-    }
-  } else {
-    const id = matches[1]
-    const response = await axios.get(`${routePrefix}/blocks/${id}`)
-    return response.data
-  }
-}
-
-/**
- * Get all reusable blocks
+ * Reusable blocks were dropped from the package, the editor still asks for them
+ * while it boots. Answering with an empty list keeps the boot going; rejecting
+ * here aborts it and the post content never loads.
  */
 async function getBlocks () {
-  const response = await axios.get(`${routePrefix}/blocks`)
-  return response.data
+  return []
 }
 
 /**
- * Create a reusable block
- * @param {Object} options
+ * No methods are allowed, so the editor does not offer to create a reusable block.
  */
-async function postBlocks (options) {
-  const response = await axios.post(`${routePrefix}/blocks`, options.data)
-  return response.data
-}
-
-/**
- * Update a reusable block
- * @param {Object} options
- * @param {Array} matches
- */
-async function putBlock (options, matches) {
-  const id = matches[1]
-  const response = await axios.put(`${routePrefix}/blocks/${id}`, options.data)
-  return response.data
-}
-
-/**
- * Delete a reusable block
- * @param {Object} options
- * @param {Array} matches
- */
-async function deleteBlock (options, matches) {
-  const id = matches[1]
-  const response = await axios.delete(`${routePrefix}/blocks/${id}`)
-  return response.data
-}
-
-/**
- * Options request for blocks
- * @param {Object} options
- * @param {Array} matches
- */
-async function optionsBlocks (options, matches) {
+async function optionsBlocks () {
   return {
     headers: {
-      get: value => {
-        if (value === 'allow') {
-          return ['GET', 'POST', 'PUT', 'DELETE']
-        }
-      }
+      get: value => (value === 'allow' ? [] : undefined)
     }
   }
 }
@@ -423,7 +342,11 @@ export default function apiFetch (options) {
   return result.then(res => {
     return res
   }).catch(error => {
-    Notices.error(`${error.message} - ${error.data.data.path}`)
+    // Errors thrown by a handler carry no data.data, reading it blindly used to
+    // replace the real failure with a TypeError.
+    const path = error.data && error.data.data && error.data.data.path
+    Notices.error(path ? `${error.message} - ${path}` : error.message)
+    console.error('[gutenberg] api request failed', options.path, error)
   })
 }
 

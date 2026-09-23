@@ -28,11 +28,6 @@
             "src/Helpers/blocks.php"
         ]
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Admin\\Gutenberg\\Test\\": "tests"
-        }
-    },
     "extra": {
         "laravel": {
             "providers": "Admin\\Gutenberg\\Providers\\GutenbergServiceProvider"

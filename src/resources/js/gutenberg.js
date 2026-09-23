@@ -1,5 +1,3 @@
-import 'babel-polyfill'
-
 import './../scss/gutenberg.scss'
 
 import './gutenberg/imports'
@@ -35,6 +33,10 @@ const Gutenberg = {
   //Core propertie
   editor: null,
 }
+
+// The admin evaluates this bundle more than once per page. Only the first run
+// may own window.wp and window.Gutenberg; see the guard in vite.config.mjs.
+window.__gutenbergBundle = Gutenberg
 
 window.Gutenberg = Gutenberg
 

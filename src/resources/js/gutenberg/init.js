@@ -4,7 +4,7 @@ import configureEditor from '../lib/configure-editor'
 import { elementReady } from '../lib/element-ready'
 
 const { blocks, data, domReady, editPost, plugins } = window.wp
-const { unregisterBlockType, registerBlockType, getBlockType } = blocks
+const { registerBlockType } = blocks
 
 /**
  * Initialize the Gutenberg editor
@@ -37,7 +37,6 @@ export default async function init(target, options = {}) {
       try {
         resolve(editPost.initializeEditor(larabergEditor.id, 'page', 1, getEditorSettings(), overridePost))
         registerCustomBlocks();
-        fixReusableBlocks();
       } catch (error) {
         console.error(error)
       }
@@ -84,17 +83,6 @@ function registerCustomBlocks(){
    window.Gutenberg.blocks.forEach(({name, block}) => {
       registerBlockType(name, block)
   })
-}
-
-function fixReusableBlocks () {
-  const coreBlock = getBlockType('core/block')
-  unregisterBlockType('core/block')
-  coreBlock.attributes = {
-    ref: {
-      type: 'number'
-    }
-  }
-  registerBlockType('core/block', coreBlock);
 }
 
 function getEditorSettings() {

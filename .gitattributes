@@ -7,14 +7,12 @@ public/* linguist-generated=true
 /.styleci.yml export-ignore
 /.travis.yml export-ignore
 /composer.lock export-ignore
-/phpunit.xml export-ignore
-/tests export-ignore
 *.map export-ignore
 /.babelrc export-ignore
 /.eslintrc.js export-ignore
 /CONTRIBUTING.md export-ignore
 /postcss.config.js export-ignore
-/webpack.config.js export-ignore
+/vite.config.mjs export-ignore
 /package.json export-ignore
 /package-lock.json export-ignore
 /yarn.lock export-ignore
