@@ -11,13 +11,15 @@ return [
         'gutenberg' => 'hidden',
     ],
 
-    'styles' => [
-        'vendor/gutenberg/css/gutenberg.css',
-    ],
+    'appearance' => [
+        'styles' => [
+            'vendor/gutenberg/css/gutenberg.css',
+        ],
 
-    'scripts' => [
-        [ 'src' => 'https://unpkg.com/react@18.3.1/umd/react.production.min.js', 'module' => false ],
-        [ 'src' => 'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js', 'module' => false ],
-        [ 'src' => 'vendor/gutenberg/js/gutenberg.js', 'module' => false ],
+        'scripts' => [
+            [ 'src' => 'https://unpkg.com/react@18.3.1/umd/react.production.min.js', 'module' => false ],
+            [ 'src' => 'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js', 'module' => false ],
+            [ 'src' => 'vendor/gutenberg/js/gutenberg.js', 'module' => false ],
+        ],
     ],
 ];
