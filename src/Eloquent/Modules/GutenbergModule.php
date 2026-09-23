@@ -3,10 +3,8 @@
 namespace Admin\Gutenberg\Eloquent\Modules;
 
 use Admin;
-use Admin\Core\Eloquent\Concerns\AdminModelFieldValue;
 use Admin\Core\Eloquent\Concerns\AdminModelModule;
 use Admin\Core\Eloquent\Concerns\AdminModelModuleSupport;
-use Admin\Gutenberg\Contracts\Blocks\BlocksBuilder;
 
 class GutenbergModule extends AdminModelModule implements AdminModelModuleSupport
 {

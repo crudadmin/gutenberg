@@ -3,7 +3,6 @@
 namespace Admin\Gutenberg\Models;
 
 use Admin\Gutenberg\Models\Content;
-use Admin\Gutenberg\Events\ContentCreated;
 use Admin\Gutenberg\Events\ContentUpdated;
 
 trait Gutenbergable

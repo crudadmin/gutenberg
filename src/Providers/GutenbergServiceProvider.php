@@ -5,7 +5,6 @@ namespace Admin\Gutenberg\Providers;
 use Admin;
 use Admin\Core\Eloquent\AdminModel;
 use Admin\Gutenberg\Eloquent\Modules\GutenbergModule;
-use Admin\Gutenberg\Fields\Mutations\AddGutenbergRawColumn;
 use Admin\Providers\AdminHelperServiceProvider;
 use Fields;
 use Illuminate\Support\Facades\Blade;

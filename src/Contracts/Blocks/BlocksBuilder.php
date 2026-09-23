@@ -2,8 +2,6 @@
 
 namespace Admin\Gutenberg\Contracts\Blocks;
 
-use Admin\Gutenberg\Contracts\Blocks\EmbedBlock;
-use Admin\Gutenberg\Contracts\Blocks\SocialBlock;
 
 class BlocksBuilder
 {

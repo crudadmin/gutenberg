@@ -3,7 +3,6 @@
 namespace Admin\Gutenberg\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use mysql_xdevapi\Exception;
 use Admin\Gutenberg\Helpers\EmbedHelper;
 use Admin\Gutenberg\Helpers\BlockHelper;
 use Admin\Gutenberg\Events\ContentCreated;
