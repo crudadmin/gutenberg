@@ -16,8 +16,10 @@ class OnAdminUpdateListener
     public function handle($event)
     {
         if ( config('admin.gutenberg', false) === true ) {
+            // Built assets, a new version replaces the published files
             Artisan::call('vendor:publish', [
-                '--provider' => GutenbergServiceProvider::class
+                '--provider' => GutenbergServiceProvider::class,
+                '--force' => true,
             ]);
 
             Admin::addGitignoreFiles([
