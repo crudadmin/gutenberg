@@ -2,10 +2,13 @@
 
 namespace Admin\Gutenberg\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Admin\Gutenberg\Contracts\Blocks\EmbedHelper;
+use Admin\Providers\AdminPackageServiceProvider;
 
-class BlocksServiceProvider extends ServiceProvider
+/**
+ * Render filters of the WordPress blocks (embeds, social links), registered by GutenbergServiceProvider.
+ */
+class BlocksServiceProvider extends AdminPackageServiceProvider
 {
     /**
      * Register the application services.
@@ -14,6 +17,8 @@ class BlocksServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        parent::register();
+
         $this->addOembedBlock();
         $this->addSocialBlock();
     }
@@ -26,9 +31,17 @@ class BlocksServiceProvider extends ServiceProvider
                 strpos($block['blockName'], 'core-embed/') !== false
                 || strpos($block['blockName'], 'core/embed') !== false
             ) {
-                $url = $block['attrs']['url'];
+                if ( ! ($url = $block['attrs']['url'] ?? null) ) {
+                    return $block_content;
+                }
 
-                $embed = EmbedHelper::create($url);
+                try {
+                    $embed = EmbedHelper::create($url);
+                } catch (\Throwable $e) {
+                    report($e);
+
+                    return $block_content;
+                }
 
                 //Replace video
                 $block_content = str_replace(

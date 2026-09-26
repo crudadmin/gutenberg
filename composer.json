@@ -30,8 +30,9 @@
     },
     "extra": {
         "laravel": {
-            "providers": "Admin\\Gutenberg\\Providers\\GutenbergServiceProvider"
+            "providers": [
+                "Admin\\Gutenberg\\Providers\\GutenbergServiceProvider"
+            ]
         }
     }
-
 }

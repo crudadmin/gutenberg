@@ -11,7 +11,13 @@ class ImageUploadController extends ApplicationController
 {
     public function upload()
     {
-        $file = request()->file;
+        $file = request()->file('file');
+
+        if ( ! $file ) {
+            return [
+                'error' => _('No file was uploaded')
+            ];
+        }
 
         $enabledMimeTypes = config('admin.gutenberg.media_mime_types', [
             'image/jpeg',
@@ -39,7 +45,7 @@ class ImageUploadController extends ApplicationController
         $filepath = $file->storeAs($uploadDirectory, $filename, 'crudadmin.uploads');
 
         ImageCompressor::tryShellCompression(
-            $path = Storage::disk('crudadmin')->path($filepath)
+            $path = Storage::disk('crudadmin.uploads')->path($filepath)
         );
 
         return [

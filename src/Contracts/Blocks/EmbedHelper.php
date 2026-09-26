@@ -14,16 +14,26 @@ class EmbedHelper
      */
     public static function serialize($embed) {
         return [
-            'url' => $embed->url,
+            // Uri objects are cast to strings, cached objects would not unserialize
+            'url' => self::string($embed->url),
             'author_name' => $embed->authorName,
-            'author_url' => $embed->authorUrl,
+            'author_url' => self::string($embed->authorUrl),
             'html' => $embed->code->html ?? null,
             'width' => $embed->code->width ?? null,
             'height' => $embed->code->height ?? null,
             'type' => 'video',
             'provider_name' => $embed->providerName,
-            'provider_url' => $embed->providerUrl
+            'provider_url' => self::string($embed->providerUrl)
         ];
+    }
+
+    /**
+     * @param  mixed  $value
+     * @return string|null
+     */
+    private static function string($value)
+    {
+        return is_null($value) ? null : (string) $value;
     }
 
     /**

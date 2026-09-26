@@ -1,6 +1,5 @@
 <?php
 
-Route::group(['middleware' => 'admin'], function () {
-    Route::get('admin/gutenberg/oembed', 'OEmbedController');
-    Route::post('admin/gutenberg/image-upload', 'ImageUploadController@upload');
-});
+// Loaded by GutenbergServiceProvider with the admin.panel middleware and the controllers namespace
+Route::get('admin/gutenberg/oembed', 'OEmbedController')->name('gutenberg.oembed');
+Route::post('admin/gutenberg/image-upload', 'ImageUploadController@upload')->name('gutenberg.image-upload');
