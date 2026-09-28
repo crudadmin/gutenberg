@@ -1,4 +1,6 @@
 <?php
+
+use Admin\Core\Helpers\Store\RequestShared;
 /**
  * Blocks API: WP_Block_Type_Registry class
  *
@@ -27,6 +29,7 @@ final class WP_Block_Type_Registry {
      * @since 5.0.0
      * @var WP_Block_Type_Registry|null
      */
+    #[RequestShared]
     private static $instance = null;
 
     /**
