@@ -1,6 +1,6 @@
 <?php
 
-use Admin\Core\Helpers\Store\RequestShared;
+use Admin\Core\State\RequestShared;
 /**
  * Blocks API: WP_Block_Type_Registry class
  *

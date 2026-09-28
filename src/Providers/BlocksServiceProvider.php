@@ -2,7 +2,7 @@
 
 namespace Admin\Gutenberg\Providers;
 
-use Admin\Core\Helpers\Store\RequestShared;
+use Admin\Core\State\RequestShared;
 use Admin\Gutenberg\Contracts\Blocks\EmbedHelper;
 use Admin\Providers\AdminPackageServiceProvider;
 
