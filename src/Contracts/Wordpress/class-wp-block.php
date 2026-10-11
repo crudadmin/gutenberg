@@ -247,6 +247,9 @@ class WP_Block {
          */
         $block_content = apply_filters( "render_block_before_{$this->name}", $block_content, $this->parsed_block, $options );
 
+        // A filter may return a view, the next filters get it rendered once instead of rendering it on every use
+        $block_content = (string) $block_content;
+
         /**
          * Filters the content of a single block.
          *

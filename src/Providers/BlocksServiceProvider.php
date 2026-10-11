@@ -28,6 +28,15 @@ class BlocksServiceProvider extends AdminPackageServiceProvider
     private static $filtersAdded = false;
 
     /**
+     * Filters of $wp_filter after the boot of the process (packages, autoloaded files of the application).
+     * Filters added during an operation, e.g. by a middleware of some routes, are removed before the next
+     * one, otherwise every request of a long running worker would add them again and run them many times.
+     *
+     * @var array<string, \WP_Hook>|null
+     */
+    private static $bootFilters = null;
+
+    /**
      * Register the application services.
      *
      * @return void
@@ -45,13 +54,34 @@ class BlocksServiceProvider extends AdminPackageServiceProvider
     }
 
     /**
-     * Forget the filters which were being applied when the previous request failed in a block.
+     * Return the filters to the state after the boot and forget the filters which were being applied
+     * when the previous request failed in a block. The first flush runs right after the boot, before
+     * the first operation of the process.
      *
      * @return void
      */
     public static function flushState()
     {
         $GLOBALS['wp_current_filter'] = [];
+
+        if (self::$bootFilters === null) {
+            self::$bootFilters = self::cloneFilters($GLOBALS['wp_filter'] ?? []);
+
+            return;
+        }
+
+        $GLOBALS['wp_filter'] = self::cloneFilters(self::$bootFilters);
+    }
+
+    /**
+     * Copy of the filters, hooks are objects and add_filter() changes them in place.
+     *
+     * @param  array<string, \WP_Hook>  $filters
+     * @return array<string, \WP_Hook>
+     */
+    private static function cloneFilters(array $filters)
+    {
+        return array_map(fn ($hook) => is_object($hook) ? clone $hook : $hook, $filters);
     }
 
     private function addOembedBlock()
